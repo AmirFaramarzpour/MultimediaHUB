@@ -1,7 +1,8 @@
 ```markdown
 # File Hosting Server Management
 
-This project is a file hosting server management tool. It allows users to start and stop a file hosting service, manage user accounts, and list connected devices. It also includes a web-based file hosting service built with Flask.
+This project is a file hosting server management tool. It allows users to start and stop a file hosting service,
+ manage user accounts, and list connected devices. It also includes a web-based file hosting service built with Flask.
 
 ## Features
 
@@ -51,10 +52,3 @@ This project is a file hosting server management tool. It allows users to start 
 
 This project is licensed under the MIT License.
 ```
-
-Next, here's the `requirements.txt` file for your project:
-
-```txt
-Flask
-```
-
