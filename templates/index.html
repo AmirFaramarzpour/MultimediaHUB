@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&family=Rowdies:wght@300;400;700&family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+    <title>File List</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Zain, serif; 
+            font-weight: 400; 
+            font-size: 16px;
+            background: linear-gradient(135deg, #2A004E, #F14A00);
+            color: #FFFBE6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        header {
+            background: #06b95123;
+            max-width: 900px;
+            padding: 20px;
+            text-align: center;
+            color: #ffffff;
+            width: 100%;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .header-content svg {
+            width: 48px;
+            height: 48px;
+            fill: #FFFFFF;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(85, 56, 56, 0.199);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .file-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .file-item {
+            background: #5e3d0427;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            gap: 10px;
+        }
+        .file-item img, .file-item video {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 8px;
+        }
+        .file-item a {
+            text-decoration: none;
+            color: #FFFBE6;
+            font-weight: bold;
+            flex-grow: 1;
+            transition: color 0.3s;
+        }
+        .file-item a:hover {
+            text-decoration: underline;
+            color: #FFA500;
+        }
+        .file-item video {
+            max-width: 200px;
+            max-height: 150px;
+        }
+        .back-link {
+            display: block;
+            margin-bottom: 20px;
+            color: #0A5EB0;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+            color: #FFA500;
+        }
+        .icon-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .icon-buttons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: rgba(53, 194, 17, 0.486);
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .icon-buttons a:hover {
+            background: rgba(54, 50, 50, 0.4);
+        }
+        .icon-buttons svg {
+            width: 24px;
+            height: 24px;
+            fill: #FFFFFF;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFFFFF">
+                <path d="M251-160q-88 0-149.5-61.5T40-371q0-79 50.5-137.5T217-579q15-84 82-148.5T451-792q24 0 42 13.5t18 36.5v294l83-83 43 43-156 156-156-156 43-43 83 83v-289q-86 11-135 75.5T267-522h-19q-61 0-104.5 43T100-371q0 65 45 108t106 43h500q45 0 77-32t32-77q0-45-32-77t-77-32h-63v-84q0-68-33-117.5T570-718v-65q81 29 129.5 101T748-522v24q72-2 122 46t50 123q0 69-50 119t-119 50H251Zm229-347Z"/>
+            </svg>
+            <h1>Home Network (LAN) File Hosting Service</h1>
+        </div>
+        <sub>TP-LINK 150Mbps Wireless N ADSL2+ Modem Router</sub>
+    </header>
+    <div class="container">
+        <a class="back-link" href="http://localhost:5000/">.. (Back to Root Folder)</a>
+        <ul class="file-list">
+            {% for file in files %}
+            <li class="file-item">
+                <a href="{{ url_for('files', subpath=current_directory + '/' + file.name) }}">{{ file.name }}</a>
+                {% if not file.is_dir %} 
+                <div class="icon-buttons">
+                    <a href="{{ url_for('files', subpath=current_directory + '/' + file.name) }}" download>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
+                            <path d="M480-313 287-506l43-43 120 120v-371h60v371l120-120 43 43-193 193ZM220-160q-24 0-42-18t-18-42v-143h60v143h520v-143h60v143q0 24-18 42t-42 18H220Z"/>
+                        </svg>
+                    </a>
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFFFFF">
+                            <path d="M686-80q-47.5 0-80.75-33.25T572-194q0-8 5-34L278-403q-16.28 17.34-37.64 27.17Q219-366 194-366q-47.5 0-80.75-33.25T80-480q0-47.5 33.25-80.75T194-594q24 0 45 9.3 21 9.29 37 25.7l301-173q-2-8-3.5-16.5T572-766q0-47.5 33.25-80.75T686-880q47.5 0 80.75 33.25T800-766q0 47.5-33.25 80.75T686-652q-23.27 0-43.64-9Q622-670 606-685L302-516q3 8 4.5 17.5t1.5 18q0 8.5-1 16t-3 15.5l303 173q16-15 36.09-23.5 20.1-8.5 43.07-8.5Q734-308 767-274.75T800-194q0 47.5-33.25 80.75T686-80Zm.04-60q22.96 0 38.46-15.54 15.5-15.53 15.5-38.5 0-22.96-15.54-38.46-15.53-15.5-38.5-15.5-22.96 0-38.46 15.54-15.5 15.53-15.5 38.5 0 22.96 15.54 38.46 15.53 15.5 38.5 15.5Zm-492-286q22.96 0 38.46-15.54 15.5-15.53 15.5-38.5 0-22.96-15.54-38.46-15.53-15.5-38.5-15.5-22.96 0-38.46 15.54-15.5 15.53-15.5 38.5 0 22.96 15.54 38.46 15.53 15.5 38.5 15.5Zm492-286q22.96 0 38.46-15.54 15.5-15.53 15.5-38.5 0-22.96-15.54-38.46-15.53-15.5-38.5-15.5-22.96 0-38.46 15.54-15.5 15.53-15.5 38.5 0 22.96 15.54 38.46 15.53 15.5 38.5 15.5ZM686-194ZM194-480Zm492-286Z"/>
+                        </svg>
+                    </a>
+                </div>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        
+    </div>
+</body>
+</html>
