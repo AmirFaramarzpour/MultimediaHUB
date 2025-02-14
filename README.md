@@ -1,5 +1,3 @@
-Sure, let's start with the `README.md` file for your GitHub repository. Here's a basic structure that you can customize further based on your needs:
-
 ```markdown
 # File Hosting Server Management
 
